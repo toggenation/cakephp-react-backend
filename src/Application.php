@@ -14,6 +14,8 @@
  */
 namespace App;
 
+
+use App\Middleware\HttpOptionsMiddleware;
 use Cake\Core\Configure;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
@@ -35,6 +37,8 @@ class Application extends BaseApplication
      */
     public function bootstrap()
     {
+        $this->addPlugin('DebugKit');
+
         // Call parent to load bootstrap from files.
         parent::bootstrap();
 
@@ -78,11 +82,14 @@ class Application extends BaseApplication
             // pass null as cacheConfig, example: `new RoutingMiddleware($this)`
             // you might want to disable this cache in case your routing is extremely simple
             ->add(new RoutingMiddleware($this, '_cake_routes_'))
-
+            ->add(new HttpOptionsMiddleware($this));
             // Add csrf middleware.
+            /*
             ->add(new CsrfProtectionMiddleware([
                 'httpOnly' => true
             ]));
+            */
+         
 
         return $middlewareQueue;
     }
