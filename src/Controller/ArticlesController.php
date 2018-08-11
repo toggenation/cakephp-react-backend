@@ -29,6 +29,7 @@ class ArticlesController extends AppController
     return boolval($user);
 }
 
+
 public function react(){
         $filePath = WWW_ROOT . '/react/asset-manifest.json';
         $file = new File($filePath);
@@ -41,7 +42,6 @@ public function react(){
         $this->set(compact('css', 'js'));
         
 }
-
     /**
      * Index method
      *
