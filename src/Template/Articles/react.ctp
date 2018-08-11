@@ -22,8 +22,7 @@
 </nav>
 <div class="articles index large-9 medium-8 columns content">
 
-
-<div id="root"></di>
+<!-- this is where the react page mounts
+<div id="root"></div>
 
 <?= $this->Html->script($js); ?>
-</div>
