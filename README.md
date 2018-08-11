@@ -23,6 +23,13 @@ mysql -uroot -p <yourpassword> < config/schema/cake.sql
 
 Copy config/app.default.php to config/app.php and change the DB connection details to suit the above database
 
+Login to the CakePHP app (assuming you serving it from the web root)
+
+http://<yourhost.tld>/users/login
+
+username: cake-react@example.com
+password: password
+
 src/Template/Articles/react.ctp contains the code to mount the react SPA (Single Page Application)
 
 View the react() function block in src/Controller/ArticlesController.php to see how the react js and css is loaded from webroot/react/asset-manifest.json
