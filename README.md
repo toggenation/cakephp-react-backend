@@ -10,6 +10,7 @@ cd cakephp-react-backend
 composer install #  installs CakePHP, DebugKit
 git submodule init
 git submodule update
+cd cakephp-react-frontend
 yarn install
 yarn start
 ```
