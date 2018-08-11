@@ -21,6 +21,8 @@ Create a database (DB name is "cake") using the config/schema/cake.sql file
 mysql -uroot -p <yourpassword> < config/schema/cake.sql
 ```
 
+Copy config/app.default.php to config/app.php and change the DB connection details to suit the above database
+
 src/Template/Articles/react.ctp contains the code to mount the react SPA (Single Page Application)
 
 View the react() function block in src/Controller/ArticlesController.php to see how the react js and css is loaded from webroot/react/asset-manifest.json
