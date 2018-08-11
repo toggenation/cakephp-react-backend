@@ -1,9 +1,3 @@
-<?php
-     $this->Html->css($css, [
-         'block' => true
-     ]);
-    
-?>
 
 <?php
 /**
@@ -20,9 +14,18 @@
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
+<?php
+     $this->Html->css($css, [
+         'block' => true
+     ]);
+    
+?>
+
 <div class="articles index large-9 medium-8 columns content">
 
 <!-- this is where the react page mounts -->
 <div id="root"></div>
 
 <?= $this->Html->script($js); ?>
+
+</div>

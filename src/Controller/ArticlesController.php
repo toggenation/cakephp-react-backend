@@ -33,14 +33,17 @@ class ArticlesController extends AppController
 public function react(){
         $filePath = WWW_ROOT . '/react/asset-manifest.json';
         $file = new File($filePath);
+
+        $manifest = json_decode($file->read());
+        $file->close();
+
         $maincss = 'main.css';
         $mainjs = 'main.js';
 
-        $manifest = json_decode($file->read());
         $css = '/react/' . $manifest->$maincss;
         $js = '/react/' . $manifest->$mainjs;
-        $this->set(compact('css', 'js'));
-        
+
+        $this->set(compact('css', 'js'));  
 }
     /**
      * Index method
