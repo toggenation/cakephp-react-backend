@@ -4,15 +4,23 @@ namespace App\Middleware;
 
 class HttpOptionsMiddleware
 {
+    use \Cake\Log\LogTrait;
+
     public function __invoke($request, $response, $next)
     {
+        $myOrigins = ['http://localhost:3000', 'http://10.19.73.29:3000', 'http://localhost'];
 
-        $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
-        ->withHeader('Access-Control-Allow-Credentials', 'true');
+        $httpOrigin = $request->env('HTTP_ORIGIN');
 
+        $this->log($request->env('HTTP_ORIGIN'));
+
+        if (in_array($httpOrigin, $myOrigins)) {
+            $response = $response->withHeader('Access-Control-Allow-Origin', $httpOrigin);
+        }
+
+        $response = $response->withHeader('Access-Control-Allow-Credentials', 'true');
 
         if ($request->getMethod() == 'OPTIONS') {
-
             $method = $request->getHeader('Access-Control-Request-Method');
             $headers = $request->getHeader('Access-Control-Request-Headers');
             $allowed = empty($method) ? 'GET, POST, PUT, DELETE' : $method;

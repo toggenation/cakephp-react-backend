@@ -1,5 +1,13 @@
 # CakePHP with a React Page Embedded in a View
 
+## CakePHP 3.x Middleware to allow for development and API access
+src/Middleware/HttpOptionsMiddleware.php
+from https://www.munderwood.ca/index.php/2017/02/28/responding-to-http-options-requests-in-cakephp/
+
+with additions inspired by https://stackoverflow.com/a/7454204
+
+## Setup
+
 You need composer and node
 
 Clone this repo to a (preferably Apache) web server
@@ -34,7 +42,7 @@ src/Template/Articles/react.ctp contains the code to mount the react SPA (Single
 
 View the react() function block in src/Controller/ArticlesController.php to see how the react js and css is loaded from webroot/react/asset-manifest.json
 
-For allowing fetch() to have access to the CakePHP endpoints see changes in 
+For allowing fetch() to have access to the CakePHP endpoints see changes in
 
 Cake File | Change |
 ---------|----------|
