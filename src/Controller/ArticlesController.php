@@ -17,15 +17,15 @@ class ArticlesController extends AppController
     public function initialize(){
 
         parent::initialize();
-     
+
        // $this->Auth->allow(['index']);
     }
 
 
-   
+
     public function isAuthorized($user)
 {
-    
+
     return boolval($user);
 }
 
@@ -36,14 +36,19 @@ public function react(){
 
         $manifest = json_decode($file->read());
         $file->close();
+        $css = [];
+        $js = [];
+        foreach($manifest->entrypoints as $resource) {
+               if (  preg_match('/\.css$/', $resource) === 1 ) {
+                    $css[] = '/react/' . $resource;
+               }
+               if (  preg_match('/\.js$/', $resource) === 1 ) {
+                $js[] = '/react/' . $resource;
+           }
+        }
 
-        $maincss = 'main.css';
-        $mainjs = 'main.js';
 
-        $css = '/react/' . $manifest->$maincss;
-        $js = '/react/' . $manifest->$mainjs;
-
-        $this->set(compact('css', 'js'));  
+        $this->set(compact('css', 'js'));
 }
     /**
      * Index method
@@ -84,7 +89,7 @@ public function react(){
      */
     public function add()
     {
-        
+
 
         $article = $this->Articles->newEntity();
 
@@ -139,7 +144,7 @@ public function react(){
     {
 
         $ajax = $this->request->is('ajax');
-      
+
         $this->request->allowMethod(['post', 'delete']);
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
