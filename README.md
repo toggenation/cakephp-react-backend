@@ -10,8 +10,6 @@ with additions inspired by https://stackoverflow.com/a/7454204
 
 You need composer and node
 
-Clone this repo to a (preferably Apache) web server
-
 ```
 git clone https://github.com/jmcd73/cakephp-react-backend.git
 cd cakephp-react-backend
@@ -31,18 +29,24 @@ mysql -uroot -p <yourpassword> < config/schema/cake.sql
 
 Copy config/app.default.php to config/app.php and change the DB connection details to suit the above database
 
+Run the default cake server
+```
+bin/cake server
+```
+
 Login to the CakePHP app (assuming you serving it from the web root)
 
-http://<yourhost.tld>/users/login
+http://localhost:8765/users/login
 
-username: cake-react@example.com
-password: password
+**Email**: cake-react@example.com
 
-src/Template/Articles/react.ctp contains the code to mount the react SPA (Single Page Application)
+**password**: password
 
-View the react() function block in src/Controller/ArticlesController.php to see how the react js and css is loaded from webroot/react/asset-manifest.json
+`src/Template/Articles/react.ctp` contains the code to mount the react SPA (Single Page Application)
 
-For allowing fetch() to have access to the CakePHP endpoints see changes in
+View the react() function block in `src/Controller/ArticlesController.php` to see how the react js and css is loaded from `webroot/react/asset-manifest.json`
+
+For allowing `fetch()` to have access to the CakePHP endpoints see changes in
 
 Cake File | Change |
 ---------|----------|
