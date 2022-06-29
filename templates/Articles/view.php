@@ -12,17 +12,13 @@
         <li><?= $this->Form->postLink(__('Delete Article'), ['action' => 'delete', $article->id], ['confirm' => __('Are you sure you want to delete # {0}?', $article->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Articles'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Article'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+       
     </ul>
 </nav>
 <div class="articles view large-9 medium-8 columns content">
     <h3><?= h($article->title) ?></h3>
     <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $article->has('user') ? $this->Html->link($article->user->id, ['controller' => 'Users', 'action' => 'view', $article->user->id]) : '' ?></td>
-        </tr>
+       
         <tr>
             <th scope="row"><?= __('Title') ?></th>
             <td><?= h($article->title) ?></td>

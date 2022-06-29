@@ -21,6 +21,7 @@ use Cake\Core\Exception\MissingPluginException;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
+use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
@@ -35,9 +36,9 @@ class Application extends BaseApplication
     /**
      * {@inheritDoc}
      */
-    public function bootstrap()
+    public function bootstrap(): void
     {
-        $this->addPlugin('DebugKit');
+       
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -45,11 +46,13 @@ class Application extends BaseApplication
         if (PHP_SAPI === 'cli') {
             try {
                 $this->addPlugin('Bake');
+                $this->addPlugin('Migrations');
+                
             } catch (MissingPluginException $e) {
                 // Do not halt if the plugin is missing
             }
 
-            $this->addPlugin('Migrations');
+          
         }
 
         /*
@@ -57,17 +60,23 @@ class Application extends BaseApplication
          * Debug Kit should not be installed on a production system
          */
         if (Configure::read('debug')) {
-            $this->addPlugin(\DebugKit\Plugin::class);
+            try {
+
+                $this->addPlugin(\DebugKit\Plugin::class);
+
+            } catch (\Throwable $e) {
+
+            }
         }
     }
 
-    /**
+     /**
      * Setup the middleware queue your application will use.
      *
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
      * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
      */
-    public function middleware($middlewareQueue)
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         $middlewareQueue
             // Catch any exceptions in the lower layers,

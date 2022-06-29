@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -14,23 +15,16 @@ use Cake\Filesystem\File;
 class ArticlesController extends AppController
 {
 
-    public function initialize(){
+    public function initialize(): void
+    {
 
         parent::initialize();
 
-       // $this->Auth->allow(['index']);
+        // $this->Auth->allow(['index']);
     }
 
-
-
-    public function isAuthorized($user)
-{
-
-    return boolval($user);
-}
-
-
-public function react(){
+    public function react()
+    {
         $filePath = WWW_ROOT . '/react/asset-manifest.json';
         $file = new File($filePath);
 
@@ -38,18 +32,18 @@ public function react(){
         $file->close();
         $css = [];
         $js = [];
-        foreach($manifest->entrypoints as $resource) {
-               if (  preg_match('/\.css$/', $resource) === 1 ) {
-                    $css[] = '/react/' . $resource;
-               }
-               if (  preg_match('/\.js$/', $resource) === 1 ) {
+        foreach ($manifest->entrypoints as $resource) {
+            if (preg_match('/\.css$/', $resource) === 1) {
+                $css[] = '/react/' . $resource;
+            }
+            if (preg_match('/\.js$/', $resource) === 1) {
                 $js[] = '/react/' . $resource;
-           }
+            }
         }
 
 
         $this->set(compact('css', 'js'));
-}
+    }
     /**
      * Index method
      *
@@ -61,9 +55,10 @@ public function react(){
             'contain' => ['Users']
         ];
         $articles = $this->paginate($this->Articles);
-        $this->log($articles);
+
         $this->set(compact('articles'));
-        $this->set('_serialize', ['articles']);
+
+        $this->viewBuilder()->setOption('serialize', ['articles']);
     }
 
     /**
@@ -90,22 +85,21 @@ public function react(){
     public function add()
     {
 
-
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
 
         $ajax = $this->request->is('ajax');
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
-                ! $ajax && $this->Flash->success(__('The article has been saved.'));
+                !$ajax && $this->Flash->success(__('The article has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            ! $ajax && $this->Flash->error(__('The article could not be saved. Please, try again.'));
+            !$ajax && $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
         $users = $this->Articles->Users->find('list', ['limit' => 200]);
         $this->set(compact('article', 'users'));
-        $this->set('_serialize', 'articles');
+        $this->viewBuilder()->setOption('serialize', 'articles');
     }
 
     /**
@@ -148,9 +142,9 @@ public function react(){
         $this->request->allowMethod(['post', 'delete']);
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            ! $ajax && $this->Flash->success(__('The article has been deleted.'));
+            !$ajax && $this->Flash->success(__('The article has been deleted.'));
         } else {
-            ! $ajax && $this->Flash->error(__('The article could not be deleted. Please, try again.'));
+            !$ajax && $this->Flash->error(__('The article could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

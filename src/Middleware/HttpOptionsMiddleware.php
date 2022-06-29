@@ -10,9 +10,10 @@ class HttpOptionsMiddleware
     {
         $myOrigins = ['http://localhost:3000', 'http://10.19.73.29:3000', 'http://localhost'];
 
-        $httpOrigin = $request->env('HTTP_ORIGIN');
+        $httpOrigin = $request->getHeaderLine('HTTP_ORIGIN');
+        // dd($httpOrigin);
 
-        $this->log($request->env('HTTP_ORIGIN'));
+         $this->log($request->getHeaderLine('HTTP_ORIGIN'));
 
         if (in_array($httpOrigin, $myOrigins)) {
             $response = $response->withHeader('Access-Control-Allow-Origin', $httpOrigin);
