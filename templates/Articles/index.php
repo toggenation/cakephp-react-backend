@@ -4,16 +4,25 @@
  * @var \App\Model\Entity\Article[]|\Cake\Collection\CollectionInterface $articles
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+
+<?php $this->extend('../layout/TwitterBootstrap/dashboard'); ?>
+
+<div class="row">
+
+<div class="col-3">
+<nav>
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <?= $this->element('reactLink'); ?>
         <li><?= $this->Html->link(__('New Article'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="articles index large-9 medium-8 columns content">
+</div>
+<div class="col-9">
+
+<div class="articles index large-9 col-9 medium-8 columns content">
     <h3><?= __('Articles') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <table class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -49,4 +58,7 @@
         </ul>
         <p><?= $this->Paginator->counter( __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
+</div>
+
+</div>
 </div>

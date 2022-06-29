@@ -20,10 +20,12 @@ use Cake\Core\Configure;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
+use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Routing\RoutingApplicationInterface;
 
 /**
  * Application setup class.
@@ -69,6 +71,8 @@ class Application extends BaseApplication
             }
         }
         $this->addPlugin('Migrations');
+        $this->addPlugin('Cors');
+        $this->addPlugin('BootstrapUI');
     }
 
      /**
@@ -91,9 +95,9 @@ class Application extends BaseApplication
             // Routes collection cache enabled by default, to disable route caching
             // pass null as cacheConfig, example: `new RoutingMiddleware($this)`
             // you might want to disable this cache in case your routing is extremely simple
-            ->add(new RoutingMiddleware($this));
+            ->add(new RoutingMiddleware($this))
 
-
+            ->add(new BodyParserMiddleware());
             // ->add(new HttpOptionsMiddleware($this));
             // Add csrf middleware.
             /*
