@@ -10,8 +10,8 @@
 <div class="row">
     <div class="col-3">
         <nav class="large-3 medium-4 columns" id="actions-sidebar">
-            <ul class="side-nav">
-                <li class="heading"><?= __('Actions') ?></li>
+            <ul class="nav flex-column">
+                <li class="nav-item"><?= __('Actions') ?></li>
                 <?= $this->element('reactLink'); ?>
             </ul>
         </nav>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -12,6 +13,7 @@
  * @since     3.3.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App;
 
 
@@ -40,7 +42,7 @@ class Application extends BaseApplication
      */
     public function bootstrap(): void
     {
-       
+
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -49,12 +51,9 @@ class Application extends BaseApplication
             try {
                 $this->addPlugin('Bake');
                 $this->addPlugin('Migrations');
-                
             } catch (MissingPluginException $e) {
                 // Do not halt if the plugin is missing
             }
-
-          
         }
 
         /*
@@ -65,9 +64,7 @@ class Application extends BaseApplication
             try {
 
                 $this->addPlugin(\DebugKit\Plugin::class);
-
             } catch (\Throwable $e) {
-
             }
         }
         $this->addPlugin('Migrations');
@@ -75,7 +72,7 @@ class Application extends BaseApplication
         $this->addPlugin('BootstrapUI');
     }
 
-     /**
+    /**
      * Setup the middleware queue your application will use.
      *
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
@@ -97,15 +94,15 @@ class Application extends BaseApplication
             // you might want to disable this cache in case your routing is extremely simple
             ->add(new RoutingMiddleware($this))
 
-            ->add(new BodyParserMiddleware());
+            ->add(new BodyParserMiddleware())
             // ->add(new HttpOptionsMiddleware($this));
             // Add csrf middleware.
-            /*
+
             ->add(new CsrfProtectionMiddleware([
-                'httpOnly' => true
+                'httponly' => true,
             ]));
-            */
-         
+
+
 
         return $middlewareQueue;
     }

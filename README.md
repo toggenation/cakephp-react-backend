@@ -34,15 +34,9 @@ Run the default cake server
 bin/cake server
 ```
 
-Login to the CakePHP app (assuming you serving it from the web root)
 
-http://localhost:8765/users/login
 
-**Email**: cake-react@example.com
-
-**password**: password
-
-`src/Template/Articles/react.ctp` contains the code to mount the react SPA (Single Page Application)
+`templates/Articles/react.ctp` contains the code to mount the react SPA (Single Page Application)
 
 View the react() function block in `src/Controller/ArticlesController.php` to see how the react js and css is loaded from `webroot/react/asset-manifest.json`
 
@@ -53,13 +47,3 @@ Cake File | Change |
 config/routes.php | Added resource route and json extension |
 src/Middleware/HttpOptionsMiddleware.php | Middleware to respond to OPTIONS and allow CORS
 src/Application.php | Place middleware is hooked into cake |
-
-The CsrfProtectionMiddleware has been switched off because I couldn't get it working so I have commented it out in `src/Application.php`
-
-```
-/*
- ->add(new CsrfProtectionMiddleware([
-                'httpOnly' => true
-            ]));
-*/
-```

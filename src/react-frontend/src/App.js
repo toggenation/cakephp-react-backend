@@ -74,6 +74,7 @@ class App extends Component {
                         mode: 'cors',
                         credentials: "include",
                         headers: {
+                          'X-CSRF-Token': window.csrfToken,
                           'X-Requested-With': 'XMLHttpRequest',
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
@@ -119,6 +120,7 @@ class App extends Component {
                   cache: 'no-cache',
                   credentials: "include",
                   headers: {
+                    'X-CSRF-Token': window.csrfToken,
                     'X-Requested-With': 'XMLHttpRequest',
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

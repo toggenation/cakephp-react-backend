@@ -38,3 +38,4 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+config/app_local.php

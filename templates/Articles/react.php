@@ -7,15 +7,18 @@
 ?>
 <?php $this->extend('../layout/TwitterBootstrap/dashboard'); ?>
 
+<?= $this->Html->scriptBlock(sprintf(
+    'var csrfToken = %s;',
+    json_encode($this->request->getAttribute('csrfToken'))
+)); ?>
+
 <div class="row">
     <div class="col-3">
-
-
         <nav class="large-3 medium-4 columns" id="actions-sidebar">
-            <ul class="side-nav">
-                <li class="heading"><?= __('Actions') ?></li>
+            <ul class="nav flex-column">
+                <li class="nav-item"><?= __('Actions') ?></li>
                 <?= $this->element('reactLink'); ?>
-                <li><?= $this->Html->link(__('New Article'), ['action' => 'add']) ?></li>
+                <li class="nav-item"><?= $this->Html->link(__('New Article'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
             </ul>
         </nav>
     </div>
