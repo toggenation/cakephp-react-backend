@@ -44,6 +44,9 @@ use Cake\Mailer\Email;
 use Cake\Mailer\TransportFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+use Cake\Error\ErrorTrap;
+use Cake\Error\ExceptionTrap;
+
 
 /**
  * Uncomment block of code below if you want to use `.env` file during development.
@@ -112,11 +115,16 @@ ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
  * Register application error and exception handlers.
  */
 $isCli = PHP_SAPI === 'cli';
-if ($isCli) {
-    (new ConsoleErrorHandler(Configure::read('Error')))->register();
-} else {
-    (new ErrorHandler(Configure::read('Error')))->register();
-}
+// if ($isCli) {
+//     (new ConsoleErrorHandler(Configure::read('Error')))->register();
+// } else {
+//     (new ErrorHandler(Configure::read('Error')))->register();
+// }
+
+
+
+(new ErrorTrap(Configure::read('Error')))->register();
+(new ExceptionTrap(Configure::read('Error')))->register();
 
 /*
  * Include the CLI bootstrap overrides.
@@ -181,14 +189,14 @@ ServerRequest::addDetector('tablet', function ($request) {
  * locale specific date formats. For details see
  * @link https://book.cakephp.org/3.0/en/core-libraries/internationalization-and-localization.html#parsing-localized-datetime-data
  */
-Type::build('time')
-    ->useImmutable();
-Type::build('date')
-    ->useImmutable();
-Type::build('datetime')
-    ->useImmutable();
-Type::build('timestamp')
-    ->useImmutable();
+// Type::build('time')
+//     ->useImmutable();
+// Type::build('date')
+//     ->useImmutable();
+// Type::build('datetime')
+//     ->useImmutable();
+// Type::build('timestamp')
+//     ->useImmutable();
 
 /*
  * Custom Inflector rules, can be set to correctly pluralize or singularize

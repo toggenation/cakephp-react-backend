@@ -68,6 +68,7 @@ class Application extends BaseApplication
 
             }
         }
+        $this->addPlugin('Migrations');
     }
 
      /**
@@ -90,8 +91,10 @@ class Application extends BaseApplication
             // Routes collection cache enabled by default, to disable route caching
             // pass null as cacheConfig, example: `new RoutingMiddleware($this)`
             // you might want to disable this cache in case your routing is extremely simple
-            ->add(new RoutingMiddleware($this, '_cake_routes_'))
-            ->add(new HttpOptionsMiddleware($this));
+            ->add(new RoutingMiddleware($this));
+
+
+            // ->add(new HttpOptionsMiddleware($this));
             // Add csrf middleware.
             /*
             ->add(new CsrfProtectionMiddleware([
