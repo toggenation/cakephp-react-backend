@@ -1,5 +1,7 @@
 # CakePHP with a React Page Embedded in a View
 
+**Note: ** As at 15 Aug 2022 I have an updated version of this at [https://github.com/toggenation/embed-react-in-cake](https://github.com/toggenation/embed-react-in-cake)
+
 ## CakePHP 3.x Middleware to allow for development and API access
 src/Middleware/HttpOptionsMiddleware.php
 from https://www.munderwood.ca/index.php/2017/02/28/responding-to-http-options-requests-in-cakephp/
